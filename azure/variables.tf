@@ -15,6 +15,12 @@ variable "hostname" {
   default     = null
 }
 
+variable "env" {
+  description = "Environment"
+  type        = string
+  default     = "production"
+}
+
 variable "debug_mode" {
   description = "Enable debug mode"
   type        = bool

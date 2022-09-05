@@ -13,6 +13,11 @@ variable "hostname" {
   type        = string
 }
 
+variable "env" {
+  description = "Environment"
+  type        = string
+}
+
 variable "debug_mode" {
   description = "Is debug mode enabled"
   type        = bool
