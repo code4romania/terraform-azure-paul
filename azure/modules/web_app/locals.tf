@@ -1,7 +1,7 @@
 locals {
   namespace     = "${var.project_slug}-${var.env}"
   resource_name = "paul-${local.namespace}"
-  hostname      = var.hostname != null ? var.hostname : "paul-${local.app_service.app_name}.azurewebsites.net"
+  hostname      = var.hostname != null ? var.hostname : "${local.app_service.app_name}.azurewebsites.net"
 
   network = {
     vn_name          = "network-${local.namespace}"
