@@ -54,7 +54,6 @@ resource "azurerm_linux_web_app" "app_service" {
     "AZURE_ACCOUNT_NAME" = azurerm_storage_account.storage_account.name
     "AZURE_ACCOUNT_KEY"  = azurerm_storage_account.storage_account.primary_access_key
     "AZURE_CONTAINER"    = azurerm_storage_container.storage_container.name
-
   }
 
   connection_string {
