@@ -1,6 +1,7 @@
 locals {
   namespace     = "${var.project_slug}-${var.env}"
-  resource_name = "rs-${local.namespace}"
+  resource_name = "paul-${local.namespace}"
+  hostname      = var.hostname != null ? var.hostname : "paul-${local.app_service.app_name}.azurewebsites.net"
 
   network = {
     vn_name          = "network-${local.namespace}"
@@ -11,10 +12,10 @@ locals {
   }
 
   app_service = {
-    name         = "svc-plan-${local.namespace}"
+    plan_name    = "paul-${local.namespace}"
+    app_name     = replace("paul-${local.namespace}", "-production$", "")
     docker_image = "code4romania/paul"
     size         = "B1" # Smallest tier but not free, F1 tier didn't allow to apply
-    domain       = var.hostname != null ? var.hostname : "svc-plan-${local.namespace}.azurewebsites.net"
   }
 
   storage_config = {
@@ -38,4 +39,3 @@ locals {
     zone                          = "2"
   }
 }
-
