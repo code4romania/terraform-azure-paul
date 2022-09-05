@@ -39,6 +39,7 @@ resource "azurerm_linux_web_app" "app_service" {
     "DJANGO_ADMIN_USERNAME" = var.admin_email
     "DJANGO_ADMIN_EMAIL"    = var.admin_email
     "DJANGO_ADMIN_PASSWORD" = random_password.admin_password.result
+    "CORS_ALLOWED_ORIGINS"  = ""
 
     "NO_REPLY_EMAIL"      = var.mail_from_address
     "EMAIL_BACKEND"       = "django.core.mail.backends.smtp.EmailBackend"
