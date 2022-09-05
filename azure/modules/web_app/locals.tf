@@ -13,7 +13,7 @@ locals {
 
   app_service = {
     plan_name    = "paul-${local.namespace}"
-    app_name     = replace("paul-${local.namespace}", "-production$", "")
+    app_name     = replace("paul-${local.namespace}", "/-production$/", "")
     docker_image = "code4romania/paul"
     size         = "B1" # Smallest tier but not free, F1 tier didn't allow to apply
   }
