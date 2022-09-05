@@ -39,7 +39,10 @@ resource "azurerm_linux_web_app" "app_service" {
     "DJANGO_ADMIN_USERNAME" = var.admin_email
     "DJANGO_ADMIN_EMAIL"    = var.admin_email
     "DJANGO_ADMIN_PASSWORD" = random_password.admin_password.result
-    "CORS_ALLOWED_ORIGINS"  = ""
+
+    "CORS_ALLOWED_ORIGINS" = "https://${local.app_service.domain}"
+    "FRONTEND_DOMAIN"      = local.app_service.domain
+    "ALLOWED_HOSTS"        = local.app_service.domain
 
     "NO_REPLY_EMAIL"      = var.mail_from_address
     "EMAIL_BACKEND"       = "django.core.mail.backends.smtp.EmailBackend"
@@ -49,7 +52,6 @@ resource "azurerm_linux_web_app" "app_service" {
     "EMAIL_PORT"          = var.mail_port
     "EMAIL_USE_TLS"       = var.mail_encryption ? "True" : "False"
 
-    "FRONTEND_DOMAIN" = var.hostname == null ? null : var.hostname
 
     "USE_AZURE"          = "True"
     "AZURE_ACCOUNT_NAME" = azurerm_storage_account.storage_account.name

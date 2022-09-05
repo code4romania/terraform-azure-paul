@@ -14,6 +14,7 @@ locals {
     name         = "svc-plan-${local.namespace}"
     docker_image = "code4romania/paul"
     size         = "B1" # Smallest tier but not free, F1 tier didn't allow to apply
+    domain       = var.hostname != null ? var.hostname : "${local.app_service.name}.azurewebsites.net"
   }
 
   storage_config = {
