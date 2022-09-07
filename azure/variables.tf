@@ -1,7 +1,7 @@
 variable "docker_tag" {
   description = "Docker image tag"
   type        = string
-  default     = "edge"
+  default     = "1.0.2"
 }
 
 variable "project_slug" {
@@ -54,6 +54,7 @@ variable "mail_username" {
 variable "mail_password" {
   description = "SMTP password"
   type        = string
+  sensitive   = true
 }
 
 variable "mail_encryption" {
