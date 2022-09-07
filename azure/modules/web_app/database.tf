@@ -1,6 +1,6 @@
 # Create postgresql database
-resource "azurerm_postgresql_flexible_server" "website_factory_db_server" {
-  name                = local.db_config.name
+resource "azurerm_postgresql_flexible_server" "db_server" {
+  name                = local.db_config.server_name
   location            = azurerm_resource_group.resource_group.location
   resource_group_name = azurerm_resource_group.resource_group.name
 
@@ -22,16 +22,16 @@ resource "azurerm_postgresql_flexible_server" "website_factory_db_server" {
 }
 
 # Manages a PostgreSQL Flexible Server DB
-resource "azurerm_postgresql_flexible_server_database" "server_database" {
-  name      = local.db_config.name
-  server_id = azurerm_postgresql_flexible_server.website_factory_db_server.id
+resource "azurerm_postgresql_flexible_server_database" "db" {
+  name      = local.db_config.db_name
+  server_id = azurerm_postgresql_flexible_server.db_server.id
   collation = "en_US.utf8"
   charset   = "utf8"
 }
 
 resource "azurerm_postgresql_flexible_server_firewall_rule" "public_network_access" {
   name             = "PublicNetworkAccess"
-  server_id        = azurerm_postgresql_flexible_server.website_factory_db_server.id
+  server_id        = azurerm_postgresql_flexible_server.db_server.id
   start_ip_address = "0.0.0.0"
   end_ip_address   = "0.0.0.0"
 }
