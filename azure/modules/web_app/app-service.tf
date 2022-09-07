@@ -1,6 +1,6 @@
 # Create App Service plan to define the capacity and resources to be shared among the app services that will be assigned to that plan
 resource "azurerm_service_plan" "app_service_plan" {
-  name                = local.app_service.plan_name
+  name                = local.app_service.name
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = azurerm_resource_group.resource_group.location
   os_type             = "Linux"
@@ -12,12 +12,12 @@ resource "azurerm_service_plan" "app_service_plan" {
   }
 
   depends_on = [
-    azurerm_postgresql_flexible_server_database.server_database
+    azurerm_postgresql_flexible_server_database.db
   ]
 }
 
 resource "azurerm_linux_web_app" "app_service" {
-  name                = local.app_service.app_name
+  name                = local.app_service.name
   location            = azurerm_resource_group.resource_group.location
   resource_group_name = azurerm_resource_group.resource_group.name
   service_plan_id     = azurerm_service_plan.app_service_plan.id
@@ -34,7 +34,7 @@ resource "azurerm_linux_web_app" "app_service" {
 
   app_settings = {
     "DEBUG"                 = var.debug_mode ? "True" : "False"
-    "DATABASE_URL"          = "postgres://${local.db_config.admin_db_user}:${local.db_config.admin_db_password}@${azurerm_private_dns_zone.dns_zone.name}/postgres"
+    "DATABASE_URL"          = "postgres://${local.db_config.admin_db_user}:${local.db_config.admin_db_password}@${azurerm_private_dns_zone.dns_zone.name}/${azurerm_postgresql_flexible_server_database.db.name}"
     "SECRET_KEY"            = random_password.app_key.result
     "DJANGO_ADMIN_USERNAME" = var.admin_email
     "DJANGO_ADMIN_EMAIL"    = var.admin_email
@@ -51,7 +51,6 @@ resource "azurerm_linux_web_app" "app_service" {
     "EMAIL_HOST_PASSWORD" = var.mail_password
     "EMAIL_PORT"          = var.mail_port
     "EMAIL_USE_TLS"       = var.mail_encryption ? "True" : "False"
-
 
     "USE_AZURE"          = "True"
     "AZURE_ACCOUNT_NAME" = azurerm_storage_account.storage_account.name
