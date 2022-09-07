@@ -1,6 +1,6 @@
 # Create App Service plan to define the capacity and resources to be shared among the app services that will be assigned to that plan
 resource "azurerm_service_plan" "app_service_plan" {
-  name                = local.app_service.plan_name
+  name                = local.app_service.name
   resource_group_name = azurerm_resource_group.resource_group.name
   location            = azurerm_resource_group.resource_group.location
   os_type             = "Linux"
@@ -17,7 +17,7 @@ resource "azurerm_service_plan" "app_service_plan" {
 }
 
 resource "azurerm_linux_web_app" "app_service" {
-  name                = local.app_service.app_name
+  name                = local.app_service.name
   location            = azurerm_resource_group.resource_group.location
   resource_group_name = azurerm_resource_group.resource_group.name
   service_plan_id     = azurerm_service_plan.app_service_plan.id
