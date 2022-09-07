@@ -12,7 +12,7 @@ resource "azurerm_service_plan" "app_service_plan" {
   }
 
   depends_on = [
-    azurerm_postgresql_flexible_server_database.server_database
+    azurerm_postgresql_flexible_server_database.db
   ]
 }
 
