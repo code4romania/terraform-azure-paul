@@ -30,7 +30,7 @@ resource "azurerm_subnet" "subnet" {
 
 # Create DNS name for postgress
 resource "azurerm_private_dns_zone" "dns_zone" {
-  name                = "${local.db_config.name}.postgres.database.azure.com"
+  name                = "${local.db_config.server_name}.postgres.database.azure.com"
   resource_group_name = azurerm_resource_group.resource_group.name
 
   tags = {
