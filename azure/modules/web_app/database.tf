@@ -1,6 +1,6 @@
 # Create postgresql database
 resource "azurerm_postgresql_flexible_server" "db_server" {
-  name                = local.db_config.server_name
+  name                = local.db_config.name
   location            = azurerm_resource_group.resource_group.location
   resource_group_name = azurerm_resource_group.resource_group.name
 
@@ -23,7 +23,7 @@ resource "azurerm_postgresql_flexible_server" "db_server" {
 
 # Manages a PostgreSQL Flexible Server DB
 resource "azurerm_postgresql_flexible_server_database" "db" {
-  name      = local.db_config.db_name
+  name      = local.db_config.name
   server_id = azurerm_postgresql_flexible_server.db_server.id
   collation = "en_US.utf8"
   charset   = "utf8"
