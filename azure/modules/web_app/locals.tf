@@ -26,7 +26,7 @@ locals {
 
   db_config = {
     server_name       = "db-${local.namespace}"
-    db_name           = local.namespace
+    db_name           = "paul-${local.namespace}"
     sku               = "B_Standard_B1ms"
     version           = "13"
     admin_db_user     = "psqladmin"
