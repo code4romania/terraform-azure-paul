@@ -64,6 +64,19 @@ resource "azurerm_linux_web_app" "app_service" {
     value = azurerm_private_dns_zone.dns_zone.name
   }
 
+  logs {
+    application_logs {
+      file_system_level = "Warning"
+    }
+
+    http_logs {
+      file_system {
+        retention_in_days = 30
+        retention_in_mb   = 35
+      }
+    }
+  }
+
   tags = {
     app = var.project_slug
     env = var.env
