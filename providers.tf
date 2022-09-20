@@ -3,7 +3,10 @@ terraform {
     organization = "code4romania"
 
     workspaces {
-      tags = ["paul"]
+      tags = [
+        "paul",
+        "azure",
+      ]
     }
   }
 }
