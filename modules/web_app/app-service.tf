@@ -98,6 +98,12 @@ resource "azurerm_app_service_managed_certificate" "managed_certificate" {
     app = var.project_slug
     env = var.env
   }
+
+  lifecycle {
+    ignore_changes = [
+      tags
+    ]
+  }
 }
 
 resource "azurerm_app_service_certificate_binding" "certificate_binding" {
