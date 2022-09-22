@@ -15,6 +15,10 @@ resource "azurerm_postgresql_flexible_server" "db_server" {
   version                = local.db_config.version
   zone                   = local.db_config.zone
 
+  lifecycle {
+    prevent_destroy = true
+  }
+
   tags = {
     app = var.project_slug
     env = var.env
@@ -27,6 +31,10 @@ resource "azurerm_postgresql_flexible_server_database" "db" {
   server_id = azurerm_postgresql_flexible_server.db_server.id
   collation = "en_US.utf8"
   charset   = "utf8"
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "azurerm_postgresql_flexible_server_firewall_rule" "public_network_access" {
