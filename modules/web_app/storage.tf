@@ -24,6 +24,28 @@ resource "azurerm_storage_account" "storage_account" {
   account_tier             = local.storage_config.tier
   account_replication_type = local.storage_config.replication_type
 
+  blob_properties {
+    cors_rule {
+      allowed_origins = [
+        "https://${local.hostname}"
+      ]
+
+      allowed_methods = [
+        "GET", "HEAD"
+      ]
+
+      allowed_headers = [
+        "Access-Control-Allow-Origin"
+      ]
+
+      exposed_headers = [
+        "Access-Control-Allow-Origin"
+      ]
+
+      max_age_in_seconds = 300
+    }
+  }
+
   identity {
     type = "SystemAssigned"
   }
