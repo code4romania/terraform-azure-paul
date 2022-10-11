@@ -27,7 +27,7 @@ resource "azurerm_storage_account" "storage_account" {
   blob_properties {
     cors_rule {
       allowed_origins = [
-        local.hostname
+        "https://${local.hostname}"
       ]
 
       allowed_methods = [
