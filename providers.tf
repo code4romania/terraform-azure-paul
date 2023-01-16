@@ -1,6 +1,6 @@
 terraform {
   cloud {
-    organization = "code4romania"
+    organization = "onghub"
 
     workspaces {
       tags = [
