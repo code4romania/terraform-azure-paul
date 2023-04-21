@@ -72,3 +72,9 @@ variable "admin_email" {
   description = "Email address of initial admin account"
   type        = string
 }
+
+variable "mailchimp_key" {
+  description = "Enables support for mailchimp plugin"
+  type        = string
+  default     = null
+}
