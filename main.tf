@@ -15,4 +15,5 @@ module "web_app" {
   mail_encryption   = var.mail_encryption
   mail_from_address = var.mail_from_address
   admin_email       = var.admin_email
+  mailchimp_key     = var.mailchimp_key
 }
