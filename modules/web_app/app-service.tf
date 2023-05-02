@@ -58,6 +58,8 @@ resource "azurerm_linux_web_app" "app_service" {
     "AZURE_CONTAINER"    = azurerm_storage_container.storage_container.name
 
     "RUN_COLLECT_STATIC" = "yes"
+
+    "MAILCHIMP_KEY" = var.mailchimp_key
   }
 
   connection_string {
