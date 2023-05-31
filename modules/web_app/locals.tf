@@ -35,6 +35,6 @@ locals {
     backup_retention_days         = 7
     geo_redundant_backup_enabled  = false
     public_network_access_enabled = true
-    zone                          = "2"
+    zone                          = var.database_az_enabled ? var.database_az : null
   }
 }
