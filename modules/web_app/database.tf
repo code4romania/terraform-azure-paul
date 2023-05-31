@@ -13,7 +13,6 @@ resource "azurerm_postgresql_flexible_server" "db_server" {
   administrator_login    = local.db_config.admin_db_user
   administrator_password = local.db_config.admin_db_password
   version                = local.db_config.version
-  zone                   = local.db_config.zone
 
   lifecycle {
     prevent_destroy = true
