@@ -35,6 +35,5 @@ locals {
     backup_retention_days         = 7
     geo_redundant_backup_enabled  = false
     public_network_access_enabled = true
-    zone                          = "2"
   }
 }
