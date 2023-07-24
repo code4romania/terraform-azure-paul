@@ -1,7 +1,7 @@
 variable "docker_tag" {
   description = "Docker image tag"
   type        = string
-  default     = "1.1.7"
+  default     = "1.2.11"
 }
 
 variable "project_slug" {
