@@ -39,6 +39,7 @@ resource "azurerm_linux_web_app" "app_service" {
     "DJANGO_ADMIN_USERNAME" = var.admin_email
     "DJANGO_ADMIN_EMAIL"    = var.admin_email
     "DJANGO_ADMIN_PASSWORD" = random_password.admin_password.result
+    "WORKER_TIMEOUT"        = var.worker_timeout
 
     "CORS_ALLOWED_ORIGINS" = "https://${local.hostname}"
     "FRONTEND_DOMAIN"      = local.hostname
