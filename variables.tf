@@ -74,6 +74,12 @@ variable "admin_email" {
   type        = string
 }
 
+variable "worker_timeout" {
+  description = "The maximum time in seconds that a worker can run"
+  type        = number
+  default     = 1200
+}
+
 variable "mailchimp_key" {
   description = "Enables support for mailchimp plugin"
   type        = string
