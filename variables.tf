@@ -1,7 +1,8 @@
 variable "docker_tag" {
   description = "Docker image tag"
   type        = string
-  default     = "1.1.7"
+  default     = "1.2.12"
+
 }
 
 variable "project_slug" {
@@ -71,6 +72,12 @@ variable "mail_from_address" {
 variable "admin_email" {
   description = "Email address of initial admin account"
   type        = string
+}
+
+variable "worker_timeout" {
+  description = "The maximum time in seconds that a worker can run"
+  type        = number
+  default     = 1200
 }
 
 variable "mailchimp_key" {
