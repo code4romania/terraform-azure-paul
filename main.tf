@@ -1,23 +1,45 @@
-module "web_app" {
-  source = "./modules/web_app"
+# Create a resource group
+resource "azurerm_resource_group" "resource_group" {
+  name     = local.resource_name
+  location = var.region
+}
 
-  # Input Variables
-  docker_tag        = var.docker_tag
-  hostname          = var.hostname
-  env               = var.env
-  project_slug      = var.project_slug
-  region            = var.region
-  debug_mode        = var.debug_mode
-  mail_host         = var.mail_host
-  mail_port         = var.mail_port
-  mail_username     = var.mail_username
-  mail_password     = var.mail_password
-  mail_encryption   = var.mail_encryption
-  mail_from_address = var.mail_from_address
-  admin_email       = var.admin_email
-  worker_timeout    = var.worker_timeout
-  mailchimp_key     = var.mailchimp_key
+# To avoid replacement, you need to import the resource:
+# terraform import random_password.db_pass securepassword
+resource "random_password" "db_pass" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
 
-  database_az_enabled = var.database_az_enabled
-  database_az         = var.database_az
+  lifecycle {
+    ignore_changes = [
+      length,
+      special,
+      override_special
+    ]
+  }
+}
+
+resource "random_password" "app_key" {
+  length  = 32
+  special = true
+
+  lifecycle {
+    ignore_changes = [
+      length,
+      special
+    ]
+  }
+}
+
+resource "random_password" "admin_password" {
+  length  = 16
+  special = true
+
+  lifecycle {
+    ignore_changes = [
+      length,
+      special
+    ]
+  }
 }
